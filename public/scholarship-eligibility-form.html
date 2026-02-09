@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Scholarship Eligibility Check — Student Admission</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Check your scholarship eligibility for UK study with Student Admission. Instant result and free consultation booking." />
+  <link rel="icon" href="https://studentadmission.uk/img/logo.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --primary:#0b3d91;
+      --accent:#d7263d;
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --radius:12px;
+      --maxW:1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#111;line-height:1.5}
+    .wrap{max-width:var(--maxW);margin:28px auto;padding:18px}
+    .header{display:flex;gap:12px;align-items:center;margin-bottom:18px}
+    .logo img{height:48px}
+    h1{margin:0;font-size:20px;color:var(--primary)}
+    p.lead{margin:6px 0 18px;color:var(--muted)}
+    .card{background:var(--card);border-radius:var(--radius);padding:16px;box-shadow:0 10px 30px rgba(13,30,63,0.06)}
+    form .section{margin-bottom:16px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea, input[type="number"], input[type="date"]{
+      width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ee;background:#fff;font-size:15px;
+    }
+    textarea{min-height:100px;resize:vertical}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .full{grid-column:1/-1}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:600;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid #e6e9ee;color:#111}
+    .muted{color:var(--muted)}
+    .note{font-size:13px;color:var(--muted);margin-top:8px}
+    .result{margin-top:18px}
+    .univ{border-radius:10px;padding:12px;background:#f8fbff;border:1px solid #e6eefc;margin-bottom:10px}
+    .badge{display:inline-block;background:var(--primary);color:#fff;padding:6px 10px;border-radius:999px;font-size:13px}
+    .inline{display:flex;gap:8px;align-items:center}
+    .right{margin-left:auto}
+    pre{background:#f3f6fb;padding:12px;border-radius:8px;overflow:auto}
+    .hidden{display:none}
+    @media (max-width:840px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div class="logo"><img src="https://studentadmission.uk/img/logo.webp" alt="Student Admission"></div>
+      <div>
+        <h1>Scholarship Eligibility Check</h1>
+        <div class="muted">Quickly see which universities & scholarships match your profile. Free consultation included.</div>
+      </div>
+      <div class="right" style="margin-left:auto">
+        <span class="badge">Free</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="lead">Fill this short form — we’ll calculate an eligibility score instantly and show matched universities with estimated scholarship ranges.</p>
+
+      <form id="eligForm" autocomplete="on" class="card" novalidate>
+        <!-- Personal -->
+        <div class="section">
+          <h3 style="margin:0 0 8px 0">Personal</h3>
+          <div class="grid">
+            <div>
+              <label for="name">Full name *</label>
+              <input id="name" required type="text" placeholder="Your full name">
+            </div>
+            <div>
+              <label for="email">Email *</label>
+              <input id="email" required type="email" placeholder="you@example.com">
+            </div>
+            <div>
+              <label for="phone">WhatsApp / Phone *</label>
+              <input id="phone" required type="tel" placeholder="+8801XXXXXXXXX">
+            </div>
+            <div>
+              <label for="nationality">Nationality *</label>
+              <input id="nationality" required type="text" placeholder="e.g. Bangladesh">
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic -->
+        <div class="section">
+          <h3 style="margin:0 0 8px 0">Academic</h3>
+          <div class="grid">
+            <div>
+              <label for="qualification">Highest Qualification *</label>
+              <select id="qualification" required>
+                <option value="">-- Select --</option>
+                <option value="bachelor_running">Bachelor's (running)</option>
+                <option value="bachelor_completed">Bachelor's (completed)</option>
+                <option value="master_running">Master's (running)</option>
+                <option value="master_completed">Master's (completed)</option>
+                <option value="foundation">Foundation / Diploma</option>
+              </select>
+            </div>
+            <div>
+              <label for="cgpa">CGPA / Percentage *</label>
+              <input id="cgpa" required type="text" placeholder="e.g. 3.5 or 72%">
+            </div>
+            <div class="full">
+              <label for="subject">Subject / Major *</label>
+              <input id="subject" required type="text" placeholder="e.g. Business, Computer Science">
+            </div>
+          </div>
+        </div>
+
+        <!-- English & MOI -->
+        <div class="section">
+          <h3 style="margin:0 0 8px 0">English Language</h3>
+          <div class="grid">
+            <div>
+              <label for="englishType">English Test Type</label>
+              <select id="englishType">
+                <option value="">-- Select --</option>
+                <option value="ielts">IELTS</option>
+                <option value="pte">PTE</option>
+                <option value="toefl">TOEFL</option>
+                <option value="duolingo">Duolingo</option>
+                <option value="moi">MOI</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div>
+              <label for="englishScore">Score (if any)</label>
+              <input id="englishScore" type="text" placeholder="e.g. 6.5, 60 (PTE), 95 (TOEFL)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferences -->
+        <div class="section">
+          <h3 style="margin:0 0 8px 0">Study Preferences</h3>
+          <div class="grid">
+            <div>
+              <label for="program">Program Level *</label>
+              <select id="program" required>
+                <option value="">-- Select --</option>
+                <option>Undergraduate</option>
+                <option>Pre-Master's</option>
+                <option>Master's</option>
+                <option>PhD</option>
+              </select>
+            </div>
+            <div>
+              <label for="intake">Preferred Intake</label>
+              <select id="intake">
+                <option>Jan 2026</option>
+                <option>Feb 2026</option>
+                <option>April 2026</option>
+                <option>May 2026</option>
+                <option>September 2026</option>
+                <option>Later</option>
+              </select>
+            </div>
+            <div>
+              <label for="budget">Annual Budget (approx) *</label>
+              <select id="budget" required>
+                <option value="">-- Select --</option>
+                <option>Under £6,000</option>
+                <option>£6,000–£12,000</option>
+                <option>£12,000–£18,000</option>
+                <option>£18,000–£25,000</option>
+                <option>£25,000+</option>
+              </select>
+            </div>
+            <div>
+              <label for="scholarType">Scholarship Type Interested</label>
+              <select id="scholarType">
+                <option>Merit-based</option>
+                <option>Need-based</option>
+                <option>Country-specific</option>
+                <option>Early-application</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button id="checkBtn" class="btn" type="button">Check Eligibility</button>
+          <button id="clearBtn" type="button" class="btn secondary">Clear</button>
+          <div class="note">You will be able to download a summary & book a free consultation after getting results.</div>
+        </div>
+
+        <p id="message" class="note" aria-live="polite"></p>
+      </form>
+
+      <!-- Results -->
+      <div id="results" class="result hidden card" aria-live="polite">
+        <div style="display:flex;align-items:center;gap:12px;justify-content:space-between">
+          <div>
+            <h2 style="margin:0 0 6px 0">Your Eligibility Summary</h2>
+            <div id="summaryText" class="muted"></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button id="downloadSummary" class="btn secondary">Download Summary</button>
+            <button id="bookConsult" class="btn">Book Free Consultation</button>
+          </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #eef2f7;margin:12px 0">
+
+        <div id="matchesList"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+  /* -------------------------
+     Mock universities database (expandable)
+     Each item: {
+       id, name, minCGPA (scale 4.0 OR percent threshold),
+       acceptsMOI (bool), minIELTS (number or null),
+       subjectKeywords: [ 'business', 'cs' ],
+       scholarshipRange: [min,max],
+       intakeDeadlines: ['2025-11-10', ...]
+     }
+     ------------------------- */
+  const UNIVERSITIES = [
+    { id: 'cov', name: 'Coventry University London', minCGPA: 2.5, acceptsMOI:false, minIELTS:6.5, subjectKeywords:['business','engineering','computer'], scholarshipRange:[1000,2500], note:'Top 40 for international ratio', deadlines:['2025-11-10'] },
+    { id: 'brunel', name: 'Brunel University London', minCGPA:2.7, acceptsMOI:true, minIELTS:6.0, subjectKeywords:['engineering','business','arts'], scholarshipRange:[1500,6000], note:'Scholarships up to £6,000', deadlines:['2025-11-10'] },
+    { id: 'dmu', name: 'De Montfort University', minCGPA:2.5, acceptsMOI:false, minIELTS:6.0, subjectKeywords:['business','fashion','design'], scholarshipRange:[1000,3000], note:'Innovator of the Year 2025', deadlines:['2025-12-15'] },
+    { id: 'cardiff', name: 'Cardiff Metropolitan University', minCGPA:2.6, acceptsMOI:true, minIELTS:6.0, subjectKeywords:['sports','business','design','health'], scholarshipRange:[1500,3500], note:'LTA Excellence 2025', deadlines:['2025-12-01'] },
+    { id: 'bpp', name: 'BPP University', minCGPA:2.8, acceptsMOI:true, minIELTS:6.5, subjectKeywords:['law','finance','accounting'], scholarshipRange:[3000,4000], note:'98% graduate employment', deadlines:['2026-01-05'] },
+    // add more partner universities here...
+  ];
+
+  // Helper: parse CGPA/percentage
+  function parseScore(input){
+    if(!input) return null;
+    const s = input.trim();
+    // if percentage
+    if(s.endsWith('%')) {
+      const v = parseFloat(s);
+      if(isNaN(v)) return null;
+      // convert percent to 4.0 scale approx: assume 70% ~ 3.0, 85% ~ 3.7 => linear map
+      return Math.round(((v/100)*4) * 100)/100;
+    }
+    // if number like 3.5
+    const v = parseFloat(s);
+    if(!isNaN(v)) {
+      // if user entered >4, maybe they put percent without %
+      if(v > 4) {
+        // treat as percent but without %
+        return Math.round(((v/100)*4) * 100)/100;
+      }
+      return v;
+    }
+    return null;
+  }
+
+  // Helper: english match
+  function englishScorePass(univ, type, score){
+    if(univ.acceptsMOI && type === 'moi') return true;
+    if(!univ.minIELTS) return true; // no strict requirement
+    if(!type || type==='none') return false;
+    // Normalize input
+    if(!score) return false;
+    const s = score.toString();
+    if(type === 'ielts') {
+      const v = parseFloat(s);
+      return !isNaN(v) && v >= univ.minIELTS;
+    }
+    if(type === 'pte') {
+      const v = parseFloat(s);
+      // approximate mapping: PTE 58 ~ IELTS 6.5; 50 ~ IELTS 6.0
+      const equivalent = v >= 63 ? 7.0 : (v >= 58?6.5:(v>=50?6.0:5.5));
+      return equivalent >= univ.minIELTS;
+    }
+    if(type === 'toefl') {
+      const v = parseFloat(s);
+      const eq = v >= 95 ? 7.0 : (v>=79?6.5:(v>=60?6.0:5.5));
+      return eq >= univ.minIELTS;
+    }
+    if(type === 'duolingo') {
+      const v = parseFloat(s);
+      const eq = v >= 120 ? 7.0 : (v>=105?6.5:(v>=90?6.0:5.5));
+      return eq >= univ.minIELTS;
+    }
+    return false;
+  }
+
+  // matching algorithm returns score 0-100 and reasons
+  function matchUniversity(univ, profile){
+    let score = 0;
+    const reasons = [];
+
+    // CGPA: full weight 40
+    const userCGPA = parseScore(profile.cgpa);
+    if(userCGPA === null) {
+      reasons.push('No valid CGPA provided');
+    } else {
+      const cgpaDiff = userCGPA - (univ.minCGPA || 2.5);
+      if(cgpaDiff >= 0) {
+        // scale: 0 -> min => 20 points; 0.5 above -> full 40
+        const part = Math.min(40, 20 + Math.min(0.5, cgpaDiff)*40);
+        score += part;
+        reasons.push(`CGPA OK (${userCGPA.toFixed(2)})`);
+      } else {
+        // below minimum
+        const part = Math.max(0, 10 + (userCGPA/(univ.minCGPA||2.5))*10); // small score
+        score += part;
+        reasons.push(`Low CGPA (${userCGPA.toFixed(2)})`);
+      }
+    }
+
+    // English: weight 25
+    const engOk = englishScorePass(univ, profile.englishType, profile.englishScore);
+    if(engOk){
+      score += 25;
+      reasons.push('English requirement met');
+    } else {
+      reasons.push('English requirement not fully met');
+    }
+
+    // Subject match: weight 15
+    const subj = profile.subject.toLowerCase();
+    let subjMatch = 0;
+    for(const kw of univ.subjectKeywords){
+      if(subj.includes(kw) || kw.includes(subj) || subj.includes(kw.slice(0,3))) subjMatch = 1;
+    }
+    if(subjMatch){
+      score += 15;
+      reasons.push('Subject match');
+    } else {
+      reasons.push('Subject less matched');
+    }
+
+    // Budget vs tuition/scholarship: weight 10 (we assume cheaper univ better for low budget)
+    // estimate: if budget low, prefer univ with smaller scholarship required (mock)
+    // We'll give points if scholarshipRange min <= budget_map threshold
+    const budgetMap = {
+      'Under £6,000':6000,
+      '£6,000–£12,000':12000,
+      '£12,000–£18,000':18000,
+      '£18,000–£25,000':25000,
+      '£25,000+':40000
+    };
+    const budgetVal = budgetMap[profile.budget] || 12000;
+    // assume univ with scholarshipRange available helps lower effective costs -> higher score if min scholarship > 0
+    const avgScholar = (univ.scholarshipRange[0] + univ.scholarshipRange[1]) / 2;
+    // If budgetVal + avgScholar >= 15000 => good
+    if(budgetVal + avgScholar >= 15000) {
+      score += 10;
+      reasons.push('Budget likely sufficient');
+    } else {
+      reasons.push('Budget may be tight');
+    }
+
+    // Intake timeliness: weight 10 (if deadline passed reduce score)
+    // If intake chosen near deadline we reduce; simple: if any university deadline is before today and matches intake period, reduce
+    const intake = profile.intake || 'Later';
+    const today = new Date();
+    let intakePoints = 5;
+    // check deadlines roughly (if deadline > today => good)
+    const hasFutureDeadline = univ.deadlines.some(d => new Date(d) > today);
+    if(hasFutureDeadline) intakePoints = 10;
+    score += intakePoints;
+    reasons.push(hasFutureDeadline ? 'Intake open' : 'Deadline may be near/closed');
+
+    // clamp 0-100
+    score = Math.max(0, Math.min(100, Math.round(score)));
+    return {univ, score, reasons};
+  }
+
+  // UI: event handlers
+  document.getElementById('clearBtn').addEventListener('click', ()=> {
+    document.getElementById('eligForm').reset();
+    document.getElementById('message').textContent = '';
+    document.getElementById('results').classList.add('hidden');
+  });
+
+  document.getElementById('checkBtn').addEventListener('click', async () => {
+    const messageEl = document.getElementById('message');
+    messageEl.textContent = '';
+    // gather profile
+    const profile = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      nationality: document.getElementById('nationality').value.trim(),
+      qualification: document.getElementById('qualification').value,
+      cgpa: document.getElementById('cgpa').value.trim(),
+      subject: document.getElementById('subject').value.trim(),
+      englishType: document.getElementById('englishType').value,
+      englishScore: document.getElementById('englishScore').value.trim(),
+      program: document.getElementById('program').value,
+      intake: document.getElementById('intake').value,
+      budget: document.getElementById('budget').value,
+      scholarType: document.getElementById('scholarType').value
+    };
+
+    // basic validation
+    if(!profile.name || !profile.email || !profile.phone || !profile.qualification || !profile.cgpa || !profile.subject || !profile.program || !profile.budget) {
+      messageEl.className = 'note';
+      messageEl.textContent = 'Please complete all required fields (marked *).';
+      return;
+    }
+    // phone minimal validation
+    if(!/^[+\d][\d\s\-()]{7,17}$/.test(profile.phone)) {
+      messageEl.className = 'note';
+      messageEl.textContent = 'Please enter a valid phone number including country code.';
+      return;
+    }
+
+    // run matching
+    const scored = UNIVERSITIES.map(u => matchUniversity(u, profile));
+    // sort descending
+    scored.sort((a,b)=>b.score - a.score);
+
+    // present results
+    const matchesList = document.getElementById('matchesList');
+    matchesList.innerHTML = '';
+    let best = scored[0];
+    document.getElementById('summaryText').textContent = `${profile.name}, we found ${scored.length} partner universities. Best match: ${best.univ.name} (Score: ${best.score}%)`;
+
+    scored.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'univ';
+      const scholarshipText = `£${item.univ.scholarshipRange[0]} - £${item.univ.scholarshipRange[1]}`;
+      div.innerHTML = `
+        <div style="display:flex;align-items:center;gap:12px">
+          <div>
+            <strong style="font-size:16px">${item.univ.name}</strong>
+            <div class="muted" style="margin-top:6px">${item.univ.note}</div>
+          </div>
+          <div style="margin-left:auto;text-align:right">
+            <div style="font-weight:700">${item.score}% Match</div>
+            <div class="muted">Estimated Scholarship: ${scholarshipText}</div>
+          </div>
+        </div>
+        <div style="margin-top:10px" class="muted"><strong>Why:</strong> ${item.reasons.join(' • ')}</div>
+      `;
+      matchesList.appendChild(div);
+    });
+
+    // show result card
+    document.getElementById('results').classList.remove('hidden');
+
+    // Save lead to backend (non-blocking)
+    try {
+      await fetch('/submit-scholarship.php', {
+        method:'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ profile, scored })
+      }).catch(()=>{/* ignore if endpoint missing */});
+    } catch(e) {
+      console.warn('Lead save failed', e);
+    }
+
+    // prepare summary data for download / WhatsApp
+    const summary = {
+      profile,
+      bestMatches: scored.slice(0,5).map(s=>({ name:s.univ.name, score:s.score, scholarship:`£${s.univ.scholarshipRange[0]}-£${s.univ.scholarshipRange[1]}`}))
+    };
+    window.__SCHOLAR_SUMMARY = summary;
+
+    // message
+    messageEl.className = 'note';
+    messageEl.textContent = 'Results ready. You can download summary or book a free consultation.';
+  });
+
+  // Download summary handler
+  document.getElementById('downloadSummary').addEventListener('click', ()=> {
+    const sum = window.__SCHOLAR_SUMMARY;
+    if(!sum){ alert('Please check eligibility first.'); return; }
+    const textLines = [];
+    textLines.push('Scholarship Eligibility Summary - Student Admission');
+    textLines.push(`Name: ${sum.profile.name}`);
+    textLines.push(`Email: ${sum.profile.email}`);
+    textLines.push(`Phone: ${sum.profile.phone}`);
+    textLines.push(`Nationality: ${sum.profile.nationality}`);
+    textLines.push(`Qualification: ${sum.profile.qualification}`);
+    textLines.push(`CGPA: ${sum.profile.cgpa}`);
+    textLines.push(`Subject: ${sum.profile.subject}`);
+    textLines.push('');
+    textLines.push('Top Matches:');
+    sum.bestMatches.forEach((m,i)=>{
+      textLines.push(`${i+1}. ${m.name} — ${m.score}% match — Est. scholarship: ${m.scholarship}`);
+    });
+    textLines.push('');
+    textLines.push('Generated by Student Admission — www.studentadmission.uk');
+    const blob = new Blob([textLines.join('\n')], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `Scholarship_Summary_${sum.profile.name.replace(/\s+/g,'_')}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Book consultation: open WhatsApp w/ prefilled message
+  document.getElementById('bookConsult').addEventListener('click', ()=> {
+    const sum = window.__SCHOLAR_SUMMARY;
+    if(!sum){ alert('Please check eligibility first.'); return; }
+    const top = sum.bestMatches[0] || {};
+    const msg =
+`Scholarship Consultation Request - Student Admission
+Name: ${sum.profile.name}
+Phone: ${sum.profile.phone}
+Email: ${sum.profile.email}
+Qualification: ${sum.profile.qualification}
+CGPA: ${sum.profile.cgpa}
+Subject: ${sum.profile.subject}
+Top match: ${top.name || 'N/A'} (${top.score || 'N/A'}%)
+Please book a free consultation.`;
+    const waNumber = '447446969466';
+    const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(msg)}`;
+    window.location.href = waUrl;
+  });
+
+  </script>
+</body>
+</html>
